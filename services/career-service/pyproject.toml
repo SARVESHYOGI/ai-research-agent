@@ -1,0 +1,16 @@
+[project]
+name = "career-service"
+version = "0.1.0"
+description = "Career intelligence: job matching, company research, resume analysis and skill-gap analysis."
+requires-python = ">=3.12"
+dependencies = [
+    "shared",
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "redis>=6",
+    "pydantic-settings>=2",
+    "httpx>=0.27",
+]
+
+[tool.uv]
+package = false

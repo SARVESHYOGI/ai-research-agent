@@ -1,0 +1,41 @@
+[project]
+name = "shared"
+version = "0.1.0"
+description = "Shared contracts, messaging, observability and security helpers for all services."
+requires-python = ">=3.12"
+dependencies = [
+    "pydantic>=2",
+    "redis>=6",
+    "opentelemetry-api>=1.27",
+    "opentelemetry-sdk>=1.27",
+    "structlog>=24",
+]
+
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[tool.uv.workspace]
+members = ["services/*"]
+
+[tool.uv.sources]
+shared = { workspace = true }
+
+[tool.setuptools.packages.find]
+include = ["shared*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "UP", "B", "SIM"]
+ignore = ["E501"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["shared", "app", "tests", "evaluation"]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.16.5",
+]
