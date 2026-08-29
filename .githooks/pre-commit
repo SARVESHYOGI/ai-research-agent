@@ -18,4 +18,13 @@ if ! uv run ruff check .; then
   exit 1
 fi
 
+if [ -d frontend/node_modules/.bin ]; then
+  if ! (cd frontend && npx biome check .); then
+    echo
+    echo "FAILED: frontend formatting/lint errors detected."
+    echo "Fix with:  cd frontend && npx biome check --write ."
+    exit 1
+  fi
+fi
+
 echo "ok: formatting + lint passed"
