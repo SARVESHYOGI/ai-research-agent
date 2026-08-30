@@ -1,0 +1,30 @@
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ai
+      POSTGRES_PASSWORD: ai
+      POSTGRES_DB: ai_research
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  app:
+    build: .
+    environment:
+      REDIS_URL: redis://redis:6379/0
+      AI_RESEARCH_DATABASE_URL: postgresql://ai:ai@db:5432/ai_research
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+      - db
+
+volumes:
+  pgdata:
