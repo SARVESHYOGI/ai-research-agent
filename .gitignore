@@ -43,3 +43,5 @@ Thumbs.db
 
 # Kubernetes secrets (never commit real values)
 infrastructure/kubernetes/**/secrets.local.yaml
+
+AGENTS.md

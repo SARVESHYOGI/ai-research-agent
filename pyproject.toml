@@ -9,6 +9,7 @@ dependencies = [
     "opentelemetry-api>=1.27",
     "opentelemetry-sdk>=1.27",
     "structlog>=24",
+    "fastapi-redis-sdk>=0.8.0",
 ]
 
 [build-system]
@@ -38,4 +39,6 @@ known-first-party = ["shared", "app", "tests", "evaluation"]
 [dependency-groups]
 dev = [
     "ruff>=0.16.5",
+    "httpx2>=0.5",
+    "pytest>=8",
 ]

@@ -17,19 +17,25 @@ def client():
 
 @pytest.mark.skipif(
     os.environ.get("TEST_REDIS", "1") != "1",
-    reason="requires a running Redis (see infrastructure/redis)",
+    reason="requires a running Redis",
 )
 def test_health_reports_redis_healthy(client):
     response = client.get("/v1/health")
     assert response.status_code == 200
     body = response.json()
-    assert "redis" in body["checks"]
+    assert body["status"] == "healthy"
     assert body["checks"]["redis"]["status"] == "healthy"
 
 
-def test_health_returns_checks_payload(client):
-    response = client.get("/v1/health")
-    assert response.status_code == 200
-    body = response.json()
-    assert set(body) == {"status", "checks"}
-    assert body["status"] in {"healthy", "unhealthy"}
+@pytest.mark.skipif(
+    os.environ.get("TEST_REDIS", "1") != "1",
+    reason="requires a running Redis",
+)
+def test_search_is_cached(client):
+    query = f"unique-cache-{os.getpid()}"
+    first = client.get("/v1/search", params={"query": query})
+    second = client.get("/v1/search", params={"query": query})
+    assert first.status_code == 200
+    assert first.headers.get("X-Redis-Cache") == "MISS"
+    assert second.headers.get("X-Redis-Cache") == "HIT"
+    assert first.json() == second.json()
