@@ -15,6 +15,9 @@ dependencies = [
     "opentelemetry-api>=1.27",
     "opentelemetry-sdk>=1.27",
     "structlog>=24",
+    "sqlalchemy[asyncio]>=2.0.52",
+    "alembic>=1.19.1",
+    "asyncpg>=0.31.0",
 ]
 
 [build-system]

@@ -45,3 +45,5 @@ Thumbs.db
 infrastructure/kubernetes/**/secrets.local.yaml
 
 AGENTS.md
+steps.md
+Progress.md

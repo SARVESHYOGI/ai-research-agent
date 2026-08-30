@@ -13,7 +13,9 @@ class Settings(BaseSettings):
     app_name: str = "ai-research-agent"
     version: str = "0.1.0"
 
-    database_url: str | None = None
+    database_url: str | None = (
+        "postgresql+asyncpg://postgres:postgres@localhost:5432/ai-research-agent"
+    )
     database_check_timeout: float = 5.0
 
 

@@ -66,6 +66,13 @@ make lint              # ruff check
 make format            # ruff format
 ```
 
+## Building the project end to end
+
+See [`steps.md`](steps.md) for a detailed, ordered build path from the current
+skeleton to a fully working agent (data layer, LLM, research, memory, agent
+harness, security, career, observability, frontend, evaluation, deploy). Every
+phase ends with a verifiable "Done when" gate.
+
 ## Project history / status
 
 This codebase was previously scaffolded as a distributed, event-driven
