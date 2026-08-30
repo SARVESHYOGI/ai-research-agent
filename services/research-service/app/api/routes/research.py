@@ -22,7 +22,9 @@ class Health(BaseModel):
 async def health(redis: AsyncRedisDep):
     result = await redis_health_check(redis)
     healthy = result.status.value == "healthy"
-    return Health(status="healthy" if healthy else "unhealthy", checks={"redis": result.model_dump()})
+    return Health(
+        status="healthy" if healthy else "unhealthy", checks={"redis": result.model_dump()}
+    )
 
 
 @router.get("/search", response_model=SearchResult)

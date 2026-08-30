@@ -45,7 +45,10 @@ def _db_error_detail(exc: Exception) -> str:
 
 def _ping_database(database_url: str, timeout: float) -> None:
     connect_timeout = max(1, int(timeout))
-    with psycopg.connect(database_url, connect_timeout=connect_timeout) as conn, conn.cursor() as cur:
+    with (
+        psycopg.connect(database_url, connect_timeout=connect_timeout) as conn,
+        conn.cursor() as cur,
+    ):
         cur.execute("SELECT 1")
 
 
